@@ -66,7 +66,7 @@ int main() {
                 TempoNormalMedia =  TempoNormalMedia + TempoNormal;
                 TempoAlternativoMedia = TempoAlternativoMedia +  TempoAlternativo;
             }          
-         } 
+        } 
         TempoNormalMedia = TempoNormalMedia/ 5;
         TempoAlternativoMedia = TempoAlternativoMedia/5;
         fprintf(arquivoTempo, "%s, %f , %f\n", linha.c_str(), TempoNormalMedia, TempoAlternativoMedia);
