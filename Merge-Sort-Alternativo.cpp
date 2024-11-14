@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <time.h>
+
 using namespace std;
 
 void merge_in_place(vector<int>& arr, int inicio, int meio, int fim) {
@@ -63,11 +63,9 @@ int main(int argc, char* argv[]) {
         cout << num << " ";
     }
     cout << endl;*/
-    clock_t Ticks[2];
-    Ticks[0] = clock();
+
     merge_sort_in_place(vetor, 0, vetor.size() - 1);
-    double Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
-    printf("Tempo gasto: %g ms.", Tempo);
+
     cout << "Vetor ordenado: ";
     for (int num : vetor) {
         cout << num << " ";
