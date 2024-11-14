@@ -36,6 +36,9 @@ int main() {
 
     while (getline(arquivo, linha)) {
         //cout << "Arquivo atual : " << linha << endl;
+        double TempoNormalMedia = 0.0;
+        double TempoAlternativoMedia = 0.0;
+
         for (int i = 0; i < 6; i++){
             clock_t Ticks[2];
             string exe = "Merge " + linha+ ".txt";
@@ -60,13 +63,13 @@ int main() {
             Ticks[1] = clock();
             double TempoAlternativo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
             if (i != 0){
-                fprintf(arquivoTempo, "%s, %f , %f\n", linha.c_str(), TempoNormal, TempoAlternativo);
-            }
-            
-            //cout << "Tempo gasto: "<< TempoAlternativo << "ms." << endl;     
-                   
-        } 
-
+                TempoNormalMedia =  TempoNormalMedia + TempoNormal;
+                TempoAlternativoMedia = TempoAlternativoMedia +  TempoAlternativo;
+            }          
+         } 
+        TempoNormalMedia = TempoNormalMedia/ 5;
+        TempoAlternativoMedia = TempoAlternativoMedia/5;
+        fprintf(arquivoTempo, "%s, %f , %f\n", linha.c_str(), TempoNormalMedia, TempoAlternativoMedia);
     }
     arquivo.close();
 
