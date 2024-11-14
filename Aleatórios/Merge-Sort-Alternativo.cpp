@@ -63,16 +63,13 @@ int main(int argc, char* argv[]) {
         cout << num << " ";
     }
     cout << endl;*/
-    clock_t Ticks[2];
-    Ticks[0] = clock();
     merge_sort_in_place(vetor, 0, vetor.size() - 1);
-    double Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
-    printf("Tempo gasto: %g ms.", Tempo);
-    cout << "Vetor ordenado: ";
+
+    /*cout << "Vetor ordenado: ";
     for (int num : vetor) {
         cout << num << " ";
     }
-    cout << endl;
+    cout << endl;*/
 
     return 0;
 }

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
+#include <time.h>
 using namespace std;
 
 void merge_in_place(vector<int>& arr, int inicio, int meio, int fim) {
@@ -63,14 +63,14 @@ int main(int argc, char* argv[]) {
         cout << num << " ";
     }
     cout << endl;*/
-
+    
     merge_sort_in_place(vetor, 0, vetor.size() - 1);
 
-    cout << "Vetor ordenado: ";
+    /*cout << "Vetor ordenado: ";
     for (int num : vetor) {
         cout << num << " ";
     }
-    cout << endl;
+    cout << endl;*/
 
     return 0;
 }

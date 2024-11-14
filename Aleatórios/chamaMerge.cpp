@@ -13,9 +13,14 @@ int main() {
         return 1;
     }
 
-
-    int compilacao = system("g++ Merge-Sort-Alternativo.cpp -o MergeA");
+    int compilacao = system("g++ Merge-Sort.cpp -o Merge");
     if (compilacao != 0) {
+        cerr << "Erro ao compilar" << endl;
+        return 1;
+    }
+
+    int compilacaoAlternativo = system("g++ Merge-Sort-Alternativo.cpp -o MergeA");
+    if (compilacaoAlternativo != 0) {
         cerr << "Erro ao compilar" << endl;
         return 1;
     }
@@ -30,23 +35,35 @@ int main() {
     fprintf(arquivoTempo, "Arquivo , Merge-Sort, Merge-Sort-Aleatorio \n");
 
     while (getline(arquivo, linha)) {
-        cout << "Arquivo atual : " << linha << endl;
+        //cout << "Arquivo atual : " << linha << endl;
         for (int i = 0; i < 6; i++){
             clock_t Ticks[2];
+            string exe = "Merge " + linha+ ".txt";
+            string exeA = "MergeA " + linha+ ".txt";
+            // NORMAL
             Ticks[0] = clock();
-            string exe = "MergeA " + linha+ ".txt";
             int execucao = system(exe.c_str());
             if (execucao != 0) {
                 cerr << "Erro ao executar" << endl;
                 return 1;
             }            
             Ticks[1] = clock();
+            double TempoNormal = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
+            // MODIFICADO
+
+            Ticks[0] = clock();
+            int execucaoA = system(exeA.c_str());
+            if (execucaoA != 0) {
+                cerr << "Erro ao executar" << endl;
+                return 1;
+            }            
+            Ticks[1] = clock();
             double TempoAlternativo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
             if (i != 0){
-                fprintf(arquivoTempo, "%s, 0 , %f\n", linha.c_str(), TempoAlternativo);
+                fprintf(arquivoTempo, "%s, %f , %f\n", linha.c_str(), TempoNormal, TempoAlternativo);
             }
             
-            cout << "Tempo gasto: "<< TempoAlternativo << "ms." << endl;     
+            //cout << "Tempo gasto: "<< TempoAlternativo << "ms." << endl;     
                    
         } 
 
