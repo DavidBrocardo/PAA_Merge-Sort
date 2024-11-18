@@ -13,13 +13,13 @@ int main() {
         return 1;
     }
 
-    int compilacao = system("g++ Merge-Sort.cpp -o Merge");
+    int compilacao = system("g++ Merge-Sort.cpp -o Merge2");
     if (compilacao != 0) {
         cerr << "Erro ao compilar" << endl;
         return 1;
     }
 
-    int compilacaoAlternativo = system("g++ Merge-Sort-Alternativo.cpp -o MergeA");
+    int compilacaoAlternativo = system("g++ Merge-Sort-Alternativo.cpp -o MergeA2");
     if (compilacaoAlternativo != 0) {
         cerr << "Erro ao compilar" << endl;
         return 1;
@@ -27,7 +27,7 @@ int main() {
     string linha;
 
 
-    FILE* arquivoTempo = fopen("TempoAleatorio.csv", "a");
+    FILE* arquivoTempo = fopen("TempoAleatorio2.csv", "a");
     if (arquivoTempo == nullptr) {
         cerr << "Erro ao abrir o arquivo." << endl;
         return 1;
@@ -35,14 +35,14 @@ int main() {
     fprintf(arquivoTempo, "Arquivo , Merge-Sort, Merge-Sort-Aleatorio \n");
 
     while (getline(arquivo, linha)) {
-        //cout << "Arquivo atual : " << linha << endl;
+        cout << "Arquivo atual : " << linha << endl;
         double TempoNormalMedia = 0.0;
         double TempoAlternativoMedia = 0.0;
 
         for (int i = 0; i < 6; i++){
             clock_t Ticks[2];
-            string exe = "Merge " + linha+ ".txt";
-            string exeA = "MergeA " + linha+ ".txt";
+            string exe = "Merge2 " + linha+ ".txt";
+            string exeA = "MergeA2 " + linha+ ".txt";
             // NORMAL
             Ticks[0] = clock();
             int execucao = system(exe.c_str());
