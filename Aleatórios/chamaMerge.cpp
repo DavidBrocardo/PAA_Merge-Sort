@@ -19,15 +19,15 @@ int main() {
         return 1;
     }
 
-    int compilacaoAlternativo = system("g++ Merge-Sort-Alternativo.cpp -o MergeA2");
+    /*int compilacaoAlternativo = system("g++ Merge-Sort-Alternativo.cpp -o MergeA2");
     if (compilacaoAlternativo != 0) {
         cerr << "Erro ao compilar" << endl;
         return 1;
-    }
+    }*/
     string linha;
 
 
-    FILE* arquivoTempo = fopen("TempoAleatorio2.csv", "a");
+    FILE* arquivoTempo = fopen("TempoAleatorio3.csv", "a");
     if (arquivoTempo == nullptr) {
         cerr << "Erro ao abrir o arquivo." << endl;
         return 1;
@@ -42,7 +42,7 @@ int main() {
         for (int i = 0; i < 6; i++){
             clock_t Ticks[2];
             string exe = "Merge2 " + linha+ ".txt";
-            string exeA = "MergeA2 " + linha+ ".txt";
+            //string exeA = "MergeA2 " + linha+ ".txt";
             // NORMAL
             Ticks[0] = clock();
             int execucao = system(exe.c_str());
@@ -54,21 +54,21 @@ int main() {
             double TempoNormal = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
             // MODIFICADO
 
-            Ticks[0] = clock();
+            /*Ticks[0] = clock();
             int execucaoA = system(exeA.c_str());
             if (execucaoA != 0) {
                 cerr << "Erro ao executar" << endl;
                 return 1;
             }            
             Ticks[1] = clock();
-            double TempoAlternativo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
+            double TempoAlternativo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;*/
             if (i != 0){
                 TempoNormalMedia =  TempoNormalMedia + TempoNormal;
-                TempoAlternativoMedia = TempoAlternativoMedia +  TempoAlternativo;
+                //TempoAlternativoMedia = TempoAlternativoMedia +  TempoAlternativo;
             }          
         } 
         TempoNormalMedia = TempoNormalMedia/ 5;
-        TempoAlternativoMedia = TempoAlternativoMedia/5;
+        //TempoAlternativoMedia = TempoAlternativoMedia/5;
         fprintf(arquivoTempo, "%s, %f , %f\n", linha.c_str(), TempoNormalMedia, TempoAlternativoMedia);
     }
     arquivo.close();
