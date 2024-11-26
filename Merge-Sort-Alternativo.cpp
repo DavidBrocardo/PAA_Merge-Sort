@@ -7,36 +7,31 @@ using namespace std;
 
 void merge_in_place(vector<int>& arr, int inicio, int meio, int fim) {
     int i = inicio;  // 1 atrib = 1
-    int j = meio + 1;   // 1 atrib + 1 soma = 2
-
-    while (i <= meio && j <= fim) { // n vezes no pior caso 
-        if (arr[i] <= arr[j]) { // 1 comp * n
-            i++; // n  // melhor caso (ordenado)
-        } else { //Pior caso 
-            int aux = arr[j]; // 1 atrib  * n = N 
-            for (int k = j; k > i; k--) { // (1 atib + n(1 comp + 1 dec) )*n  = 2n^2 + n
-                arr[k] = arr[k - 1]; // 2n^2
+    int j = meio + 1;   // 1 atrib + 1 soma =  2
+    while (i <= meio && j <= fim) { // 2 comparacao * n = 2n 
+        if (arr[i] <= arr[j]) { // (1 comp + 2 indexação) * n = 2n 
+            i++; // n  
+        } else { 
+            int aux = arr[j]; // (1 atrib + 1 index) * n =  2n  
+            for (int k = j; k > i; k--) { // (1 atib*n + ((n^2+n)/2 * (1 comp + 1 dec)) + 1comp *n  = n^2 + 3n
+                arr[k] = arr[k - 1]; // (1 atrib + 1 index + 1 sub)* (n^2+n)/2 = 2n^2 + 2n
             }
-            arr[i] = aux; // 1 atrib = n
+            arr[i] = aux; // 1 atrib + 1 index = 2n
             i++; // 1 inc = n
             meio++;// 1 inc = n
             j++;// 1 inc = n
         }
-    } //4n^2 + 7n + 3 Pior caso 
-     // caso base  2n + 3
+    } //Total = 3n^2 + 17n + 3 
 }
 
-void merge_sort_in_place(vector<int>& arr, int inicio, int fim) { // 2 Chamadas de n/2 + custo de 6n 
-    if (inicio < fim) { // 1 comparacao * n-1 = 2n
-        int meio = inicio + (fim - inicio) / 2; // 4n 
-        merge_sort_in_place(arr, inicio, meio); // n/2 vezes
-        merge_sort_in_place(arr, meio + 1, fim); // n/2 vezes
-        merge_in_place(arr, inicio, meio, fim); //  
-    } // T(n)  =  2T(n/2) + 4n^2 + 13n + 3 
-    // T(n) = 2T(n/2) + n^2
-    // Teorema mestre  =  n ^ Log(2)2 =1
-    //                     f(n) =  n^2  -> Custo quadrático
-}
+void merge_sort_in_place(vector<int>& arr, int inicio, int fim) { 
+    if (inicio < fim) { // 1 comparacao 
+        int meio = inicio + (fim - inicio) / 2; // (1 atrib + 1 soma + 1 sub + 1 div) 
+        merge_sort_in_place(arr, inicio, meio); // 1 chamada rec 
+        merge_sort_in_place(arr, meio + 1, fim); // (1 chamada rec + 1 soma )
+        merge_in_place(arr, inicio, meio, fim); //  (1 chamada de funcao)
+    } 
+}// 
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
